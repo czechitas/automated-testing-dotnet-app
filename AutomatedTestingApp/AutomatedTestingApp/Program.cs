@@ -1,7 +1,24 @@
+using AutomatedTestingApp.Helpers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using AutomatedTestingApp.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+                       throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlite(connectionString));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(x =>
+    {
+        x.LoginPath = new PathString("/Account/Login");
+        x.AccessDeniedPath = new PathString("/Account/AccessDenied");
+    });
 
 var app = builder.Build();
 
@@ -18,6 +35,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
