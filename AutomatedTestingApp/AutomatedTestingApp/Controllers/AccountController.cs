@@ -15,25 +15,31 @@ public class AccountController : Controller
     {
         _userRepository = userRepository;
     }
+    
+    [HttpGet]
+    public IActionResult Login(string? returnUrl = null)
+    {
+        ViewData["ReturnUrl"] = returnUrl;
+        return View();
+    }
 
     [HttpPost]
-    public async Task<IActionResult> Login(string userName, string password)
+    public async Task<IActionResult> Login(string userName, string password, string? returnUrl = null)
     {
         var user = await _userRepository.GetUserByUsernameAsync(userName);
         if (user == null || user.Password != password)
-            //Todo there has to be Login.cshtml from Martin
             return View();
-        
-        var claims = new List<Claim>
-        {
-            new(ClaimTypes.Name, user.Username)
-        };
 
         await HttpContext.SignInAsync(
             CookieAuthenticationDefaults.AuthenticationScheme,
-            new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
-
-        return Redirect("/");
+            new ClaimsPrincipal(
+                new ClaimsIdentity(
+                    new List<Claim>
+                    {
+                        new(ClaimTypes.Name, user.Username)
+                    }, CookieAuthenticationDefaults.AuthenticationScheme)));
+        
+        return Redirect(Url.IsLocalUrl(returnUrl) ? returnUrl : "/");
     }
 
     [HttpPost]
@@ -56,7 +62,7 @@ public class AccountController : Controller
         return View("Login");
     }
     
-    public IActionResult AccessDenied(string returnUrl = null)
+    public IActionResult AccessDenied(string? returnUrl = null)
     {
         return View();
     }
