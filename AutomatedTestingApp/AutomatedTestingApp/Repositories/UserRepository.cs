@@ -1,5 +1,6 @@
 using AutomatedTestingApp.Entity;
 using AutomatedTestingApp.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedTestingApp.Repositories;
 
@@ -17,9 +18,14 @@ public class UserRepository : IUserRepository, IDisposable
         return _context.Users.ToList();
     }
 
-    public User GetUserById(Guid userId)
+    public User? GetUserById(Guid userId)
     {
         return _context.Users.FirstOrDefault(x => x.UserId == userId);
+    }
+
+    public Task<User?> GetUserByUsernameAsync(string username)
+    {
+        return _context.Users.FirstOrDefaultAsync(x => x.Username == username);
     }
 
     public void CreateUser(User user)
@@ -34,7 +40,7 @@ public class UserRepository : IUserRepository, IDisposable
 
     public void DeleteUser(User user)
     {
-        var student = _context.Users.Find(user.UserId);
+        var student = GetUserById(user.UserId);
         
         if(student != null)
             _context.Users.Remove(student);
@@ -45,18 +51,18 @@ public class UserRepository : IUserRepository, IDisposable
         _context.SaveChanges();
     }
 
-    private bool disposed;
+    private bool _disposed;
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!disposed)
+        if (!_disposed)
         {
             if (disposing)
             {
                 _context.Dispose();
             }
         }
-        disposed = true;
+        _disposed = true;
     }
     
     public void Dispose()
