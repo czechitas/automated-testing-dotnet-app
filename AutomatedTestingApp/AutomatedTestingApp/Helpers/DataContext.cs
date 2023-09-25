@@ -1,4 +1,4 @@
-using AutomatedTestingApp.Entity;
+using AutomatedTestingApp.Areas.Identity.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedTestingApp.Helpers;
@@ -9,5 +9,5 @@ public class DataContext : DbContext
     {
     }
     
-    public DbSet<User> Users { get; set; }
+    public DbSet<IdentityUser> Users { get; set; }
 }

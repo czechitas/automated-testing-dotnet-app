@@ -1,6 +1,6 @@
+using AutomatedTestingApp.Areas.Identity.Repositories;
 using AutomatedTestingApp.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using AutomatedTestingApp.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +16,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(x =>
     {
-        x.LoginPath = new PathString("/Account/Login");
-        x.AccessDeniedPath = new PathString("/Account/AccessDenied");
+        x.LoginPath = new PathString("/Identity/Account/Login");
+        //x.AccessDeniedPath = new PathString("/Identity/Account/AccessDenied");
     });
 
 var app = builder.Build();
@@ -38,6 +38,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapAreaControllerRoute("identity", "Identity", "Identity/{controller=Account}/{action=Login}/{id?}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
