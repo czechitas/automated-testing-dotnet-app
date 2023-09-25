@@ -1,8 +1,9 @@
-name: Build and Push Docker Image
+name: Build and Publish
 
 on:
   check_run:
     types: [rerequested, completed]
+  workflow_dispatch: 
 
 jobs:
   build:
