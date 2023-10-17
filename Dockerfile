@@ -9,7 +9,6 @@ COPY ["AutomatedTestingApp/AutomatedTestingApp/AutomatedTestingApp.csproj", "Aut
 RUN dotnet restore "AutomatedTestingApp/AutomatedTestingApp.csproj"
 COPY . .
 WORKDIR "/src/AutomatedTestingApp"
-RUN dotnet build "AutomatedTestingApp.csproj" -c Release
 
 FROM build AS publish
 RUN dotnet publish "AutomatedTestingApp.csproj" -c Release -o /app/publish /p:UseAppHost=false
