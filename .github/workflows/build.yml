@@ -1,5 +1,9 @@
 name: Build and Publish
 
+env:
+  PROJECT_NAME: AutomatedTestingApp.csproj
+  PROJECT_PATH: ./AutomatedTestingApp/AutomatedTestingApp
+
 on:
   check_run:
     types: [rerequested, completed]
@@ -22,9 +26,12 @@ jobs:
 
         - name: Build
           run: | 
-            dotnet build --configuration Release --no-restore
-          working-directory: ./AutomatedTestingApp
+            dotnet build $PROJECT_NAME --configuration Release --no-restore
+          working-directory: $PROJECT_PATH
 
         - name: Publish
-          run: dotnet publish --no-build --configuration Release --output ./publish
-          working-directory: ./AutomatedTestingApp
+          run: |
+            dotnet publish $PROJECT_NAME --no-build --no-restore --configuration Release --output ./publish
+          working-directory: $PROJECT_PATH
+          
+        #TODO: Add tests here
