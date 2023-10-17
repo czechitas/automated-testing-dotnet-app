@@ -26,12 +26,12 @@ jobs:
 
         - name: Build
           run: | 
-            dotnet build $PROJECT_NAME --configuration Release --no-restore
-          working-directory: $PROJECT_PATH
+            dotnet build AutomatedTestingApp.csproj --configuration Release --no-restore
+          working-directory: ./AutomatedTestingApp/AutomatedTestingApp
 
         - name: Publish
           run: |
-            dotnet publish $PROJECT_NAME --no-build --no-restore --configuration Release --output ./publish
-          working-directory: $PROJECT_PATH
+            dotnet publish AutomatedTestingApp.csproj --no-build --no-restore --configuration Release --output ./publish
+          working-directory: ./AutomatedTestingApp/AutomatedTestingApp
           
         #TODO: Add tests here
