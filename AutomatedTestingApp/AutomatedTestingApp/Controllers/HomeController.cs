@@ -5,19 +5,18 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AutomatedTestingApp.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     public HomeController(ILogger<HomeController> logger)
     {
     }
-
-    [Authorize]
+    
     public IActionResult Index()
     {
         return View();
     }
-
-    [Authorize]
+    
     public IActionResult Privacy()
     {
         return View();

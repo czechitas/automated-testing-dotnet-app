@@ -35,4 +35,11 @@
     </ItemGroup>
 
 
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Account\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Articles\Index.cshtml" />
+    </ItemGroup>
+
+
 </Project>

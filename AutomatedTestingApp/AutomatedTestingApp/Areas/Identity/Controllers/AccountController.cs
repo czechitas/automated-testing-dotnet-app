@@ -1,22 +1,20 @@
 using System.Security.Claims;
-using AutomatedTestingApp.Entity;
-using AutomatedTestingApp.Repositories;
+using AutomatedTestingApp.Areas.Identity.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AutomatedTestingApp.Controllers;
+namespace AutomatedTestingApp.Areas.Identity.Controllers;
 
 public class AccountController : Controller
 {
-    readonly IUserRepository _userRepository;
+    private readonly IUserRepository _userRepository;
 
     public AccountController(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
     
-    [HttpGet]
     public IActionResult Login(string? returnUrl = null)
     {
         ViewData["ReturnUrl"] = returnUrl;
@@ -28,7 +26,10 @@ public class AccountController : Controller
     {
         var user = await _userRepository.GetUserByUsernameAsync(userName);
         if (user == null || user.Password != password)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
+        }
 
         await HttpContext.SignInAsync(
             CookieAuthenticationDefaults.AuthenticationScheme,
@@ -42,7 +43,7 @@ public class AccountController : Controller
         return Redirect(Url.IsLocalUrl(returnUrl) ? returnUrl : "/");
     }
 
-    [HttpPost]
+    /*[HttpPost]
     public async Task<IActionResult> Register(string userName, string password)
     {
         if (await _userRepository.GetUserByUsernameAsync(userName) != null)
@@ -50,7 +51,7 @@ public class AccountController : Controller
             return BadRequest("User already exist");
         }
         
-        _userRepository.CreateUser(new User
+        _userRepository.CreateUser(new IdentityUser
         {
             UserId = Guid.NewGuid(),
             Username = userName,
@@ -60,12 +61,7 @@ public class AccountController : Controller
         _userRepository.Save();
         
         return View("Login");
-    }
-    
-    public IActionResult AccessDenied(string? returnUrl = null)
-    {
-        return View();
-    }
+    }*/
     
     public async Task<IActionResult> Logout()
     {

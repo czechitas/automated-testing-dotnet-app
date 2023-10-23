@@ -1,8 +1,8 @@
-using AutomatedTestingApp.Entity;
+using AutomatedTestingApp.Areas.Identity.Models;
 using AutomatedTestingApp.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutomatedTestingApp.Repositories;
+namespace AutomatedTestingApp.Areas.Identity.Repositories;
 
 public class UserRepository : IUserRepository, IDisposable
 {
@@ -13,32 +13,32 @@ public class UserRepository : IUserRepository, IDisposable
         _context = context;
     }
     
-    public IEnumerable<User> GetUsers()
+    public IEnumerable<IdentityUser> GetUsers()
     {
         return _context.Users.ToList();
     }
 
-    public User? GetUserById(Guid userId)
+    public IdentityUser? GetUserById(Guid userId)
     {
         return _context.Users.FirstOrDefault(x => x.UserId == userId);
     }
 
-    public Task<User?> GetUserByUsernameAsync(string username)
+    public Task<IdentityUser?> GetUserByUsernameAsync(string username)
     {
         return _context.Users.FirstOrDefaultAsync(x => x.Username == username);
     }
 
-    public void CreateUser(User user)
+    public void CreateUser(IdentityUser user)
     {
         _context.Users.Add(user);
     }
 
-    public void UpdateUser(User user)
+    public void UpdateUser(IdentityUser user)
     {
         _context.Users.Update(user);
     }
 
-    public void DeleteUser(User user)
+    public void DeleteUser(IdentityUser user)
     {
         var student = GetUserById(user.UserId);
         
