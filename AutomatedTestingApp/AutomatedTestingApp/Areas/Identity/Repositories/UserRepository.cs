@@ -1,5 +1,5 @@
 using AutomatedTestingApp.Areas.Identity.Models;
-using AutomatedTestingApp.Helpers;
+using AutomatedTestingApp.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedTestingApp.Areas.Identity.Repositories;
