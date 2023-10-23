@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 var connectionString = Environment.GetEnvironmentVariable("CUSTOMCONNSTR_SQLITE") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlite(connectionString));
+    options.UseSqlite($"DataSource={connectionString};Cache=Shared"));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(x =>
