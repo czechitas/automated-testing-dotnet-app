@@ -6,10 +6,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["AutomatedTestingApp/AutomatedTestingApp/AutomatedTestingApp.csproj", "AutomatedTestingApp/"]
-RUN dotnet restore "AutomatedTestingApp/AutomatedTestingApp/AutomatedTestingApp.csproj"
+RUN dotnet restore "AutomatedTestingApp/AutomatedTestingApp.csproj"
 COPY . .
 WORKDIR "/src/AutomatedTestingApp"
-RUN dotnet build "AutomatedTestingApp.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "AutomatedTestingApp.csproj" -c Release -o /app/publish /p:UseAppHost=false
