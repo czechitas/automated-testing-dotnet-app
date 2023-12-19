@@ -7,35 +7,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-      <Content Update="Areas\Identity\Views\Account\Login.cshtml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="Areas\Identity\_ViewImports.cshtml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="Views\Home\Index.cshtml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="Views\Home\Privacy.cshtml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="Views\Shared\_Layout.cshtml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="Views\Shared\Error.cshtml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="Views\_ViewImports.cshtml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="Views\_ViewStart.cshtml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
+    
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
@@ -45,12 +17,15 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.11" />
     </ItemGroup>
 
-
     <ItemGroup>
-      <Folder Include="Migrations\" />
+
+        <Content Update="Areas\**\*.cshtml">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Update="Views\**\*.cshtml">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
-
-
 
     <ItemGroup>
       <None Update="Data\AutomatedTestingApp.db">
@@ -58,5 +33,16 @@
       </None>
     </ItemGroup>
 
-
+    <Target Name="CopyAreas" AfterTargets="Publish">
+        <ItemGroup>
+            <Folder Include="Areas\**\*.cshtml" />
+        </ItemGroup>
+        <Copy SourceFiles="@(Folder)" DestinationFolder="$(PublishDir)\Areas\%(RecursiveDir)" />
+    </Target>
+    <Target Name="CopyViews" AfterTargets="Publish">
+        <ItemGroup>
+            <Folder Include="Views\**\*.cshtml" />
+        </ItemGroup>
+        <Copy SourceFiles="@(Folder)" DestinationFolder="$(PublishDir)\Views\%(RecursiveDir)" />
+    </Target>
 </Project>
