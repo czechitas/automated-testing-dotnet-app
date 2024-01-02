@@ -46,25 +46,27 @@ public class AccountController : Controller
         return Redirect(Url.IsLocalUrl(returnUrl) ? returnUrl : "/");
     }
 
-    /*[HttpPost]
-    public async Task<IActionResult> Register(string userName, string password)
+    [HttpPost]
+    public IActionResult Register(string userName, string password)
     {
-        if (await _userRepository.GetUserByUsernameAsync(userName) != null)
+        var user = UserRepository.Get(x => x.Username == userName).FirstOrDefault();
+        
+        if (user != null)
         {
             return BadRequest("User already exist");
         }
         
-        _userRepository.CreateUser(new IdentityUser
+        UserRepository.Insert(new IdentityUser
         {
             UserId = Guid.NewGuid(),
             Username = userName,
             Password = password
         });
         
-        _userRepository.Save();
+        _unitOfWork.Commit();
         
         return View("Login");
-    }*/
+    }
     
     public async Task<IActionResult> Logout()
     {
