@@ -1,5 +1,6 @@
 using System.Security.Claims;
-using AutomatedTestingApp.Areas.Identity.Repositories;
+using AutomatedTestingApp.Areas.Identity.Models;
+using AutomatedTestingApp.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +9,12 @@ namespace AutomatedTestingApp.Areas.Identity.Controllers;
 
 public class AccountController : Controller
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
+    private IRepository<IdentityUser> UserRepository => _unitOfWork.GetRepository<IdentityUser>();
 
-    public AccountController(IUserRepository userRepository)
+    public AccountController(IUnitOfWork unitOfWork)
     {
-        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
     }
     
     public IActionResult Login(string? returnUrl = null)
@@ -24,7 +26,8 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(string userName, string password, string? returnUrl = null)
     {
-        var user = await _userRepository.GetUserByUsernameAsync(userName);
+        var user = UserRepository.Get(x => x.Username == userName).FirstOrDefault();
+        
         if (user == null || user.Password != password)
         {
             ViewData["ReturnUrl"] = returnUrl;
