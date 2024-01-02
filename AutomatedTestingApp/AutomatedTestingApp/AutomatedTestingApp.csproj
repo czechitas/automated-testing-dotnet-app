@@ -7,11 +7,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
+    
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
@@ -21,12 +17,15 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.11" />
     </ItemGroup>
 
-
     <ItemGroup>
-      <Folder Include="Migrations\" />
+
+        <Content Update="Areas\**\*.cshtml">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Update="Views\**\*.cshtml">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
-
-
 
     <ItemGroup>
       <None Update="Data\AutomatedTestingApp.db">
@@ -34,12 +33,16 @@
       </None>
     </ItemGroup>
 
-
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Views\Account\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Articles\Index.cshtml" />
-    </ItemGroup>
-
-
+    <Target Name="CopyAreas" AfterTargets="Publish">
+        <ItemGroup>
+            <Folder Include="Areas\**\*.cshtml" />
+        </ItemGroup>
+        <Copy SourceFiles="@(Folder)" DestinationFolder="$(PublishDir)\Areas\%(RecursiveDir)" />
+    </Target>
+    <Target Name="CopyViews" AfterTargets="Publish">
+        <ItemGroup>
+            <Folder Include="Views\**\*.cshtml" />
+        </ItemGroup>
+        <Copy SourceFiles="@(Folder)" DestinationFolder="$(PublishDir)\Views\%(RecursiveDir)" />
+    </Target>
 </Project>
