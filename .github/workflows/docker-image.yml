@@ -13,7 +13,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          global-json: 'global.json'
+
+      - name: Install dependencies
+        run: dotnet restore
+        working-directory: ./AutomatedTestingApp
+
+      - name: Build
+        run: |
+          dotnet build ${{ env.PROJECT_NAME }} --configuration Release --no-restore
+        working-directory: ${{ env.PROJECT_PATH }}
+
+      - name: Publish
+        run: |
+          dotnet publish ${{ env.PROJECT_NAME }} --no-build --no-restore --configuration Release --output ./publish
+        working-directory: ${{ env.PROJECT_PATH }}
+      
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -27,3 +46,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: hiresm/czechitas:latest
+          args: |
+            --build-arg APP_PATH=./publish
