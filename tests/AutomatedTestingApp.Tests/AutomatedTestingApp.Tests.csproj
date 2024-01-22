@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\AutomatedTestingApp\AutomatedTestingApp.csproj" />
     <ProjectReference Include="..\AutomatedTestingApp\AutomatedTestingApp.csproj" />
   </ItemGroup>
   
