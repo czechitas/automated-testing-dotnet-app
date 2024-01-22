@@ -33,6 +33,8 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Views\Account\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Articles\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Calendar\Calendar.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Views\Shared\_Layout.cshtml" />
     </ItemGroup>
 
 
