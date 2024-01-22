@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedTestingApp", "src\AutomatedTestingApp\AutomatedTestingApp.csproj", "{BDE864B5-49FE-461D-A872-444051C989DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedTestingApp.Tests", "tests\AutomatedTestingApp.Tests\AutomatedTestingApp.Tests.csproj", "{61CB4E97-F8C4-412C-BC70-72EF359172CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E59DE8FE-A6EE-40B3-AD51-442955494864}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDE864B5-49FE-461D-A872-444051C989DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE864B5-49FE-461D-A872-444051C989DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE864B5-49FE-461D-A872-444051C989DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE864B5-49FE-461D-A872-444051C989DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61CB4E97-F8C4-412C-BC70-72EF359172CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61CB4E97-F8C4-412C-BC70-72EF359172CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61CB4E97-F8C4-412C-BC70-72EF359172CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61CB4E97-F8C4-412C-BC70-72EF359172CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{61CB4E97-F8C4-412C-BC70-72EF359172CB} = {E59DE8FE-A6EE-40B3-AD51-442955494864}
+	EndGlobalSection
+EndGlobal

@@ -1,5 +1,5 @@
-using AutomatedTestingApp.Areas.Identity.Repositories;
 using AutomatedTestingApp.Helpers;
+using AutomatedTestingApp.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +12,7 @@ var connectionString = Environment.GetEnvironmentVariable("CUSTOMCONNSTR_SQLITE"
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlite($"DataSource={connectionString};Cache=Shared"));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(x =>
     {

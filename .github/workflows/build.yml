@@ -2,7 +2,7 @@ name: Build and Publish
 
 env:
   PROJECT_NAME: AutomatedTestingApp.csproj
-  PROJECT_PATH: ./AutomatedTestingApp/AutomatedTestingApp
+  PROJECT_PATH: ./src/AutomatedTestingApp
 
 on:
   check_run:
@@ -24,7 +24,6 @@ jobs:
 
         - name: Install dependencies
           run: dotnet restore
-          working-directory: ./AutomatedTestingApp
 
         - name: Build
           run: | 
