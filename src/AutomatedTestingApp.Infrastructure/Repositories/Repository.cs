@@ -1,8 +1,7 @@
 using System.Linq.Expressions;
-using AutomatedTestingApp.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutomatedTestingApp.Repositories;
+namespace AutomatedTestingApp.Infrastructure.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {

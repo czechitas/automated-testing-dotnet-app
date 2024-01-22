@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutomatedTestingApp.Areas.Identity.Controllers;
 using AutomatedTestingApp.Areas.Identity.Models;
-using AutomatedTestingApp.Repositories;
+using AutomatedTestingApp.Infrastructure.Repositories;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

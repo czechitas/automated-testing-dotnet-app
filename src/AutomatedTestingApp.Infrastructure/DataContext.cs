@@ -1,7 +1,7 @@
-using AutomatedTestingApp.Areas.Identity.Models;
+using AutomatedTestingApp.Core.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutomatedTestingApp.Helpers;
+namespace AutomatedTestingApp.Infrastructure;
 
 public class DataContext : DbContext
 {

@@ -1,4 +1,4 @@
-namespace AutomatedTestingApp.Repositories;
+namespace AutomatedTestingApp.Infrastructure.Repositories;
 
 public interface IUnitOfWork
 {

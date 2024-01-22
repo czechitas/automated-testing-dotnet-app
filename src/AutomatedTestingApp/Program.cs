@@ -1,5 +1,5 @@
-using AutomatedTestingApp.Helpers;
-using AutomatedTestingApp.Repositories;
+using AutomatedTestingApp.Infrastructure;
+using AutomatedTestingApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 

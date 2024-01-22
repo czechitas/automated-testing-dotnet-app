@@ -1,6 +1,4 @@
-using AutomatedTestingApp.Helpers;
-
-namespace AutomatedTestingApp.Repositories;
+namespace AutomatedTestingApp.Infrastructure.Repositories;
 
 public class UnitOfWork : IUnitOfWork, IDisposable
 {

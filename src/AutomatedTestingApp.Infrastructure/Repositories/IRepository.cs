@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace AutomatedTestingApp.Repositories;
+namespace AutomatedTestingApp.Infrastructure.Repositories;
 
 public interface IRepository<TEntity>
 {

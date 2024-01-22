@@ -1,9 +1,9 @@
 using System.Security.Claims;
-using AutomatedTestingApp.Areas.Identity.Models;
-using AutomatedTestingApp.Repositories;
+using AutomatedTestingApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using IdentityUser = AutomatedTestingApp.Core.Users.IdentityUser;
 
 namespace AutomatedTestingApp.Areas.Identity.Controllers;
 

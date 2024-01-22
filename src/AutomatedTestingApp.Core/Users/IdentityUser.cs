@@ -1,7 +1,7 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutomatedTestingApp.Areas.Identity.Models;
+namespace AutomatedTestingApp.Core.Users;
 
 [Keyless]
 public class IdentityUser
